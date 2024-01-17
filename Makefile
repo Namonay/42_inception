@@ -1,4 +1,5 @@
 DETACH ?= true
+DATA_PATH ?= /home/vvaas/data
 
 all:
 ifeq ($(DETACH), true)
@@ -16,5 +17,8 @@ fclean:
 	-docker rmi -f $$(docker images -qa)
 	-docker volume rm $$(docker volume ls -q)
 	-docker network rm $$(docker network ls -q) 2>/dev/null
+	rm -r $(DATA_PATH)/mariadb/*
+	rm -r $(DATA_PATH)/wordpress/*
+
 re: fclean
 	docker-compose -f srcs/docker-compose.yml up -d
