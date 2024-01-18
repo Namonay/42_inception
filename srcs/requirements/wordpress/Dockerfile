@@ -8,6 +8,7 @@ RUN     apt-get install php-fpm -y
 RUN     apt-get install php-mysql -y
 RUN     apt-get install mariadb-client -y
 RUN     apt-get install less -y
+RUN     apt-get install sendmail -y
 RUN     wget https://fr.wordpress.org/latest-fr_FR.tar.gz -P /var/www
 #install all dependencies
 
@@ -23,7 +24,7 @@ RUN     mv wp-cli.phar /usr/local/bin/wp.phar
 
 RUN		chown -R root:root /var/www/wordpress
 
-COPY    conf/configscript.sh configscript.sh
+COPY    tools/configscript.sh configscript.sh
 #move the script from conf to the docker container
 
 RUN     chmod +x configscript.sh
